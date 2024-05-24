@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaTeX Preview with MathJax</title>
-    <script type="text/javascript" id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #input-box {
-            width: 100%;
-            height: 100px;
-            font-size: 16px;
-            /* margin-bottom: 20px; */
-        }
-        #preview {
-            border: 1px solid #ccc;
-            padding: 20px;
-            min-height: 300px;
-            margin-bottom: 50px;
-            font-size: 40px; /* Increase the font size for better readability */
-        }
-        h1{
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-
-<h1>Preview</h1>
-<div id="preview">Your LaTeX output will appear here...</div>
-
-<h1>Latex Input</h1>
-<textarea id="input-box" placeholder="Type your LaTeX commands here..."></textarea>
-
-<script>
-    document.getElementById('input-box').addEventListener('input', function() {
-        var input = document.getElementById('input-box').value;
-        var preview = document.getElementById('preview');
-        preview.innerHTML = `\\[ ${input} \\]`;
-        MathJax.typesetPromise([preview]).catch(function (err) {
-            preview.innerHTML = '';
-            preview.appendChild(document.createTextNode(err.message));
-        });
-    });
-</script>
-
-</body>
-</html>
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="style.css" />
-		<title>Math Symbols</title>
-		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<title>LaTeX Preview with MathJax</title>
 		<script
+			type="text/javascript"
 			id="MathJax-script"
 			async
-			src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"
+			src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 		></script>
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<h1>Math Symbols</h1>
-		<div class="container">
-			<div class="center">
-				<input type="text" value="+" id="textbox" />
-				<select id="dropdown">
-				</select>
-			</div>
-		</div>
+		<h1>Preview</h1>
+		<div id="preview">Output will appear here...</div>
 
+		<h1>Input</h1>
+		<textarea
+			id="input-box"
+			placeholder="Type your LaTeX commands here..."
+		></textarea>
+
+
+        <div class="keyboard">
+            <button onclick="insertAtCursor('\\frac{a}{b}')">\(\frac{a}{b}\)</button>
+            <button onclick="insertAtCursor('\\sqrt{a}')">\(\sqrt{x}\)</button>
+            <button onclick="insertAtCursor('\\sum_{i=1}^{n}i')">\(\sum_{i=1}^n\)</button>
+            <button onclick="insertAtCursor('\\int_{a}^{b}')">\(\int_{a}^{b}\)</button>
+            <button onclick="insertAtCursor('\\alpha')">\(\alpha\)</button>
+            <button onclick="insertAtCursor('\\beta')">\(\beta\)</button>
+            <button onclick="insertAtCursor('\\gamma')">\(\gamma\)</button>
+            <button onclick="insertAtCursor('\\pi')">\(\pi\)</button>
+            <button onclick="insertAtCursor('\\theta')">\(\theta\)</button>
+            <button onclick="insertAtCursor('\\lambda')">\(\lambda\)</button>
+            <button onclick="insertAtCursor('\\mu')">\(\mu\)</button>
+            <button onclick="insertAtCursor('\\sigma')">\(\sigma\)</button>
+            <button onclick="insertAtCursor('\\phi')">\(\phi\)</button>
+            <button onclick="insertAtCursor('\\partial')">\(\partial\)</button>
+            <button onclick="insertAtCursor('\\infty')">\(\infty\)</button>
+            <button onclick="insertAtCursor('\\int')">\(\int\)</button>
+            <button onclick="insertAtCursor('\\sum')">\(\sum\)</button>
+            <button onclick="insertAtCursor('\\lim_{x \\to \\infty}')">\(\lim_{x \to \infty}\)</button>
+            <button onclick="insertAtCursor('\\log')">\(\log\)</button>
+            <button onclick="insertAtCursor('\\sin')">\(\sin\)</button>
+            <button onclick="insertAtCursor('\\cos')">\(\cos\)</button>
+            <button onclick="insertAtCursor('\\tan')">\(\tan\)</button>
+            <button onclick="insertAtCursor(' x^{a}')">\(x^n\)</button>
+            <button onclick="insertAtCursor(' x_{a}')">\(x_n\)</button>
+            <button onclick="insertAtCursor('\\cdot')">\(\cdot\)</button>
+            <button onclick="insertAtCursor('\\times')">\(\times\)</button>
+            <button onclick="insertAtCursor('\\div')">\(\div\)</button>
+            <button onclick="insertAtCursor('\\pm')">\(\pm\)</button>
+            <button onclick="insertAtCursor('\\neq')">\(\neq\)</button>
+            <button onclick="insertAtCursor('\\leq')">\(\leq\)</button>
+            <button onclick="insertAtCursor('\\geq')">\(\geq\)</button>
+            <button onclick="insertAtCursor('\\left( \\right)', 7)">\(\left( \right)\)</button>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 50px;">Predefined Equations</h3>
+        <div class="keyboard">
+            <button onclick="insertAtCursor('\\left( \\sum_{k=1}^n a_k b_k \\right)^{\\!\\!2} \\leq \\left( \\sum_{k=1}^n a_k^2 \\right) \\left( \\sum_{k=1}^n b_k^2 \\right)')">\(\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)\)</button>
+            <button onclick="insertAtCursor('\\sqrt{3x-1}+(1+x)^2')">\(\sqrt{3x-1}+(1+x)^2\)</button>
+            <button onclick="insertAtCursor('\\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x - \\mu)^2}{2\\sigma^2}}')">\(\frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}\)</button>
+            <button onclick="insertAtCursor('\\begin{align}\\dot{x} & = \\sigma(y-x) \\\\\\dot{y} & = \\rho x - y - xz \\\\\\dot{z} & = -\\beta z + xy\\end{align}')">\(\begin{align}\dot{x} & = \sigma(y-x) \\dot{y} & = \rho x - y - xz \\dot{z} & = -\beta z + xy\end{align}\)</button>
+            <button onclick="insertAtCursor('\\mathbf{V}_1 \\times \\mathbf{V}_2 = \\begin{vmatrix}\\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ \\frac{\\partial X}{\\partial u} & \\frac{\\partial Y}{\\partial u} & 0 \\\\ \\frac{\\partial X}{\\partial v} & \\frac{\\partial Y}{\\partial v} & 0 \\end{vmatrix}')">\(\mathbf{V}_1 \times \mathbf{V}_2 = \begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial X}{\partial u} & \frac{\partial Y}{\partial u} & 0 \\ \frac{\partial X}{\partial v} & \frac{\partial Y}{\partial v} & 0 \end{vmatrix}\)</button>
+            <button onclick="insertAtCursor('P(E) = {n \\choose k} p^k (1-p)^{ n-k}')">\(P(E) = {n \choose k} p^k (1-p)^{ n-k}\)</button>
+            <button onclick="insertAtCursor('\\frac{1}{(\\sqrt{\\phi \\sqrt{5}}-\\phi) e^{\\frac25 \\pi}} = 1+\\frac{e^{-2\\pi}} {1+\\frac{e^{-4\\pi}} {1+\\frac{e^{-6\\pi}} {1+\\frac{e^{-8\\pi}} {1+\\ldots} } } }')">\(\frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\ldots} } } }\)</button>
+            <button onclick="insertAtCursor('1 + \\frac{q^2}{(1-q)} + \\frac{q^6}{(1-q)(1-q^2)} + \\cdots = \\prod_{j=0}^{\\infty}\\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \\quad\\quad \\text{for $|q| < 1$}')">\(1 + \frac{q^2}{(1-q)} + \frac{q^6}{(1-q)(1-q^2)} + \cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for $|q| < 1$}\)</button>
+            <!-- <button onclick="insertAtCursor('\\begin{align}\\nabla \\times \\vec{\\mathbf{B}} -\\, \\frac1c\\, \\frac{\\partial\\vec{\\mathbf{E}}}{\\partial t} & = \\frac{4\\pi}{c}\\vec{\\mathbf{j}} \\\\ \\nabla \\cdot \\vec{\\mathbf{E}} & = 4 \\pi \\rho \\\\ \\nabla \\times \\vec{\\mathbf{E}}\\, +\\, \\frac1c\\, \\frac{\\partial\\vec{\\mathbf{B}}}{\\partial t} & = \\vec{\\mathbf{0}} \\\\ \\nabla \\cdot \\vec{\\mathbf{B}} & = 0\\end{align}')">\(\begin{align}\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\ \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\ \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\ \nabla \cdot \vec{\mathbf{B}} & = 0\end{align}\)</button> -->
+            <button onclick="insertAtCursor('f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x - \\mu)^2}{2\\sigma^2}}')">\(f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}\)</button>
+            <!-- <button onclick="insertAtCursor('')">\(\)</button> -->
+            <!-- <button onclick="insertAtCursor('')">\(\)</button> -->
+            
+        </div>
+
+        
+        
 		<script src="script.js"></script>
 	</body>
-</html> -->
+</html>
